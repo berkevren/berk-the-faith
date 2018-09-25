@@ -1,4 +1,5 @@
 import org.junit.Test;
+import card.*;
 
 public class DeckFileReaderTest {
 
@@ -7,7 +8,7 @@ public class DeckFileReaderTest {
         Card vorseRaider = new NormalMonsterCard("Vorse Raider", "This wicked Beast-Warrior does every horrid " +
                 "thing imaginable, and loves it! His axe bears the marks of his countless victims.", "Dark",
                 "Beast-Warrior", 1900,1200, 4);
-        vorseRaider.cardType = CardTypes.NORMALMONSTER;
+        vorseRaider.setCardType(CardTypes.NORMALMONSTER);
 
         DeckFileReader deckFileReader = new DeckFileReader("cards/deckOnlyVorseRaider.txt");
         assert(vorseRaider.toString().equals(deckFileReader.readCardsFromTextFile().get(0).toString()));

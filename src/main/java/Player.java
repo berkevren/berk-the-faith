@@ -1,3 +1,5 @@
+import card.*;
+
 public class Player {
 
     private String playerName;
@@ -10,6 +12,12 @@ public class Player {
         this.playerDeck = new Deck(deckTextFileAddress);
         this.playerHand = new Deck();
 
+    }
+
+    public void drawStartingHand() {
+        for (int i = 0; i < 5; i++) {
+            drawCardFromDeck();
+        }
     }
 
     public void drawCardFromDeck() {

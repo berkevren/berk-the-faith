@@ -1,7 +1,10 @@
+import card.NormalMonsterCard;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import card.*;
 
 public class DeckFileReader {
 
@@ -46,15 +49,21 @@ public class DeckFileReader {
 
     public Card createCard(BufferedReader br) throws IOException {
 
-        if (br.readLine().equals("Monster")) {
+        String cardType = br.readLine();
+
+        if (cardType.equals("Monster")) {
             return createMonsterCard(br);
         }
+        if (cardType.equals("Spell"))
+            return createSpellCard(br);
         return null;
     }
 
     public Card createMonsterCard(BufferedReader br) throws IOException {
 
-        if (br.readLine().equals("Normal")) {
+        String cardType = br.readLine();
+
+        if (cardType.equals("Normal")) {
             return createNormalMonsterCard(br);
         }
         return null;
@@ -69,12 +78,35 @@ public class DeckFileReader {
         int attackPoints = Integer.parseInt(br.readLine());
         int defencePoints = Integer.parseInt(br.readLine());
         int level = Integer.parseInt(br.readLine());
+        CardTypes cardType = CardTypes.NORMALMONSTER;
 
-        Card normalMonsterCard = new NormalMonsterCard(cardName, cardText, cardAttribute,
-                cardMonsterType, attackPoints, defencePoints, level);
+        NormalMonsterCard normalMonsterCard = new NormalMonsterCard(cardName, cardText, cardType,
+                cardAttribute, cardMonsterType, attackPoints, defencePoints, level);
 
         return normalMonsterCard;
 
+    }
+
+    private Card createSpellCard(BufferedReader br) throws IOException {
+
+        String cardType = br.readLine();
+
+        if (cardType.equals("Normal")) {
+            return createNormalSpellCard(br);
+        }
+        return null;
+
+    }
+
+    private Card createNormalSpellCard(BufferedReader br) throws IOException {
+
+        cardName = br.readLine();
+        cardText = br.readLine();
+        CardTypes cardType = CardTypes.NORMALSPELL;
+
+        NormalSpellCard normalSpellCard = new NormalSpellCard(cardName, cardText, cardType);
+
+        return normalSpellCard;
     }
 
 }

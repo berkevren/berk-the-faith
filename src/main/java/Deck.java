@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+import card.*;
+
 public class Deck {
 
     private ArrayList<Card> deck;
