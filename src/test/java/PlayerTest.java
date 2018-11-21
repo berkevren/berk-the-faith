@@ -1,15 +1,18 @@
-import card.NormalMonsterCard;
+import berkTheFaith.Deck;
+import berkTheFaith.Player;
+import berkTheFaith.card.NormalMonsterCard;
+import org.junit.Before;
 import org.junit.Test;
 
-import card.*;
+import berkTheFaith.card.*;
 
 public class PlayerTest {
 
     private String deckTextFileAddress;
     private Player playerBerk, playerRival;
     private Card vorseRaider, blueEyesWhiteDragon;
-    private Deck testHand;
 
+    @Before
     public void init() {
         initCards();
         initDeckAddress();
@@ -20,19 +23,16 @@ public class PlayerTest {
     public void initCards() {
 
         vorseRaider = new NormalMonsterCard("Vorse Raider", "This wicked Beast-Warrior does every horrid " +
-                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", "Dark",
-                "Beast-Warrior", 1900,1200, 4);
-        vorseRaider.setCardType(CardTypes.NORMALMONSTER);
+                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
+                "Dark", "Beast-Warrior", 1900,1200, 4);
 
         blueEyesWhiteDragon = new NormalMonsterCard("Blue-Eyes White Dragon", "This wicked Beast-Warrior does every horrid " +
-                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", "Dark",
-                "Beast-Warrior", 3000,2500, 8);
-        blueEyesWhiteDragon.setCardType(CardTypes.NORMALMONSTER);
-
+                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
+                "Light", "Dragon", 3000,2500, 8);
     }
 
     public void initDeckAddress() {
-        deckTextFileAddress = "cards/deck3VorseRaider3BlueEyes.txt";
+        deckTextFileAddress = "/testDecks/deck3VorseRaider3BlueEyes.txt";
     }
 
     public void initPlayers() {
@@ -42,9 +42,6 @@ public class PlayerTest {
 
     @Test
     public void drawSingleCardFromDeck() {
-
-        init();
-
         playerBerk.drawCardFromDeck();
 
         assert(playerBerk.getPlayerHand().revealTopCard().equals(vorseRaider));
@@ -54,18 +51,23 @@ public class PlayerTest {
     @Test
     public void drawStartingHand() {
 
+        Deck testHand = new Deck();
+        Card expectedCard, actualCard;
+
         testHand.addCardToBottomOfDeck(vorseRaider);
         testHand.addCardToBottomOfDeck(vorseRaider);
         testHand.addCardToBottomOfDeck(vorseRaider);
         testHand.addCardToBottomOfDeck(blueEyesWhiteDragon);
         testHand.addCardToBottomOfDeck(blueEyesWhiteDragon);
 
-        Card expectedCard, actualCard;
+        playerBerk.drawStartingHand();
 
         for (int i = 0; i < 5; i++) {
 
             expectedCard = playerBerk.getPlayerHand().getTopCardAndRemoveFromDeck();
             actualCard = testHand.getTopCardAndRemoveFromDeck();
+            System.out.println("Expected card: " + expectedCard.toString());
+            System.out.println("Actual card: " + actualCard.toString());
             assert(expectedCard.equals(actualCard));
         }
     }

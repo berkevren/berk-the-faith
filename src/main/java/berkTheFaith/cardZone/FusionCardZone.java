@@ -1,4 +1,4 @@
-package cardZone;
+package berkTheFaith.cardZone;
 
 public class FusionCardZone extends CardZone {
 

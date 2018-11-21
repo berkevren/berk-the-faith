@@ -1,4 +1,6 @@
-import card.*;
+package berkTheFaith;
+
+import berkTheFaith.card.*;
 
 public class Player {
 

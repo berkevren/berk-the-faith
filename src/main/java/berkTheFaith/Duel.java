@@ -1,3 +1,5 @@
+package berkTheFaith;
+
 public class Duel {
 
     private Player player1, player2;

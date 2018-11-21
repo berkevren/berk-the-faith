@@ -1,4 +1,4 @@
-package card;
+package berkTheFaith.card;
 
 public abstract class Card {
 

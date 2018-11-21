@@ -1,16 +1,17 @@
+import berkTheFaith.DeckFileReader;
 import org.junit.Test;
-import card.*;
+import berkTheFaith.card.*;
 
 public class DeckFileReaderTest {
 
     @Test
     public void deckFromVorseRaiderOnlyTest() {
         Card vorseRaider = new NormalMonsterCard("Vorse Raider", "This wicked Beast-Warrior does every horrid " +
-                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", "Dark",
-                "Beast-Warrior", 1900,1200, 4);
-        vorseRaider.setCardType(CardTypes.NORMALMONSTER);
+                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
+                "Dark", "Beast-Warrior", 1900,1200, 4);
 
-        DeckFileReader deckFileReader = new DeckFileReader("cards/deckOnlyVorseRaider.txt");
+        System.out.println(System.getProperty("user.dir"));
+        DeckFileReader deckFileReader = new DeckFileReader("/testDecks/deckOnlyVorseRaider.txt");
         assert(vorseRaider.toString().equals(deckFileReader.readCardsFromTextFile().get(0).toString()));
     }
 

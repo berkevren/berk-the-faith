@@ -1,6 +1,7 @@
-package cardCreation;
+package berkTheFaith.cardCreation;
 
-import card.*;
+import berkTheFaith.card.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -10,9 +11,9 @@ public class MonsterCardCreator extends CardCreator {
     private String cardName, cardText, cardAttribute, cardMonsterType;
     private CardTypes monsterType;
 
-    public MonsterCardCreator(BufferedReader bufferedReader) {
+    public MonsterCardCreator(BufferedReader bufferedReader){
         super(bufferedReader);
-    }
+    };
 
     public Card createMonsterCard() throws IOException {
 

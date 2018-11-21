@@ -1,4 +1,4 @@
-package card;
+package berkTheFaith.card;
 
 public enum CardTypes {
 

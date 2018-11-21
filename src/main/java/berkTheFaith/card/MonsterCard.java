@@ -1,4 +1,4 @@
-package card;
+package berkTheFaith.card;
 
 public class MonsterCard extends Card {
 

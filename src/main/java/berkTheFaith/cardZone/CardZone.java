@@ -1,6 +1,6 @@
-package cardZone;
+package berkTheFaith.cardZone;
 
-import card.*;
+import berkTheFaith.card.*;
 
 public class CardZone {
 

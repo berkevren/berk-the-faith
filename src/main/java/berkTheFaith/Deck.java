@@ -1,7 +1,9 @@
+package berkTheFaith;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
-import card.*;
+import berkTheFaith.card.*;
 
 public class Deck {
 
