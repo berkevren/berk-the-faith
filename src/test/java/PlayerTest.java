@@ -66,8 +66,6 @@ public class PlayerTest {
 
             expectedCard = playerBerk.getPlayerHand().getTopCardAndRemoveFromDeck();
             actualCard = testHand.getTopCardAndRemoveFromDeck();
-            System.out.println("Expected card: " + expectedCard.toString());
-            System.out.println("Actual card: " + actualCard.toString());
             assert(expectedCard.equals(actualCard));
         }
     }

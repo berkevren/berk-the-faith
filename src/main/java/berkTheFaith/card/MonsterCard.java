@@ -5,6 +5,9 @@ public class MonsterCard extends Card {
     protected int attackPoints, defencePoints, level;
     protected String attribute, monsterType;
 
+    public MonsterCard() {
+
+    }
     public MonsterCard(String cardName, String cardText, CardTypes cardType,
                        String attribute, String monsterType, int attackPoints,
                        int defencePoints, int level) {
@@ -35,4 +38,23 @@ public class MonsterCard extends Card {
         return result;
     }
 
+    public void setAttackPoints(int attackPoints) {
+        this.attackPoints = attackPoints;
+    }
+
+    public void setDefencePoints(int defencePoints) {
+        this.defencePoints = defencePoints;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setAttribute(String attribute) {
+        this.attribute = attribute;
+    }
+
+    public void setMonsterType(String monsterType) {
+        this.monsterType = monsterType;
+    }
 }
