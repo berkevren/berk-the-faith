@@ -30,6 +30,11 @@ public abstract class Card {
         return result;
     }
 
+    public String toReadableByDeckFileReaderForm() {
+        String readableByDeckFileReaderForm = "\n" + cardType.toString(cardType) + "\n" + cardName + "\n" + cardText;
+        return readableByDeckFileReaderForm;
+    }
+
     public void setCardType(CardTypes cardType) {
         this.cardType = cardType;
     }

@@ -51,8 +51,6 @@ public class CardCreator {
     public Card createCardFromBufferedReader() {
 
         try {
-
-            //System.out.println("THIS IS FIRST LINE: " + br.readLine());
             if (br.readLine().equals("Normal Monster")) {
                 return createNormalMonsterCardFromBufferedReader();
             }

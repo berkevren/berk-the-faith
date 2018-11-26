@@ -19,6 +19,10 @@ public class DeckFileReader {
         this.deckTextFileAddress = System.getProperty("user.dir") + deckTextFileAddress;
     }
 
+    public DeckFileReader() {
+
+    }
+
     public ArrayList<Card> readCardsFromTextFile() {
 
         if (!(this.containsAtLeastOneLine()))
@@ -66,6 +70,8 @@ public class DeckFileReader {
         JSONObject jsonObject = new JSONObject(returnString);
         CardCreator cardCreator = new CardCreator(jsonObject);
 
+        writeCardFromAPIToTextFile(cardCreator.createCardFromJSON(), cardName);
+
         return cardCreator.createCardFromJSON();
 
     }
@@ -91,6 +97,25 @@ public class DeckFileReader {
 
         // delete [ at the start and ] at the end
         return response.substring(1, response.length()-1);
+    }
+
+    public boolean writeCardFromAPIToTextFile(Card card, String cardName) {
+
+        cardName = cardName.replaceAll("%20", " "); // fix space character
+
+        try {
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
+                    System.getProperty("user.dir") + "/cards/" + cardName + ".txt"));
+            bufferedWriter.append(card.toReadableByDeckFileReaderForm());
+            bufferedWriter.close();
+
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+
     }
 
 }

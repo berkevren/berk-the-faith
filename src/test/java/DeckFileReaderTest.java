@@ -27,4 +27,12 @@ public class DeckFileReaderTest {
         assert(vorseRaider.toString().equals(deckFileReader.createCardFromAPI("Vorse Raider").toString()));
     }
 
+    @Test
+    public void writeVorseRaiderToTxtFile() throws IOException {
+        DeckFileReader deckFileReader = new DeckFileReader();
+        deckFileReader.createCardFromAPI("Vorse Raider");
+        DeckFileReader deckFileReaderToReadFromAPITextFile = new DeckFileReader("/cards/Vorse Raider.txt");
+        assert(vorseRaider.toString().equals(deckFileReaderToReadFromAPITextFile.readCardsFromTextFile().get(0).toString()));
+    }
+
 }

@@ -38,6 +38,12 @@ public class MonsterCard extends Card {
         return result;
     }
 
+    public String toReadableByDeckFileReaderForm() {
+        String readableByDeckFileReaderForm = "\n" + attribute + "\n" + monsterType + "\n" + attackPoints +
+                "\n" + defencePoints + "\n" + level;
+        return super.toReadableByDeckFileReaderForm() + readableByDeckFileReaderForm;
+    }
+
     public void setAttackPoints(int attackPoints) {
         this.attackPoints = attackPoints;
     }

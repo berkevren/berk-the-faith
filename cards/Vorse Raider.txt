@@ -1,0 +1,9 @@
+
+Normal Monster
+Vorse Raider
+This wicked Beast-Warrior does every horrid thing imaginable, and loves it! His axe bears the marks of his countless victims.
+DARK
+Beast-Warrior
+1900
+1200
+4
