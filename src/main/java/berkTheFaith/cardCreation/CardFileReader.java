@@ -1,4 +1,4 @@
-package berkTheFaith;
+package berkTheFaith.cardCreation;
 
 import berkTheFaith.card.Card;
 import berkTheFaith.card.MonsterCard;

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import berkTheFaith.card.*;
+import berkTheFaith.cardCreation.DeckFileReader;
 
 public class Deck {
 

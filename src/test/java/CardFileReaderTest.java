@@ -1,4 +1,4 @@
-import berkTheFaith.CardFileReader;
+import berkTheFaith.cardCreation.CardFileReader;
 import org.junit.Before;
 import org.junit.Test;
 import berkTheFaith.card.*;
