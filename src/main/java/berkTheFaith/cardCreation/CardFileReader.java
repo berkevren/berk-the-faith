@@ -11,10 +11,11 @@ import java.net.URL;
 
 public class CardFileReader {
 
-    private String cardTextFileAddress, nextLine;
+    private String cardName, cardTextFileAddress;
     private CardCreator cardCreator;
 
     public CardFileReader(String cardName) {
+        this.cardName = cardName;
         this.cardTextFileAddress = System.getProperty("user.dir") + "/cards/" + cardName + ".txt";
     }
 
@@ -22,34 +23,14 @@ public class CardFileReader {
 
     public Card readSingleCardFromTextFile() {
 
-        if (!(this.containsAtLeastOneLine()))
-            return new MonsterCard();
-
         try (BufferedReader br = new BufferedReader(new FileReader(cardTextFileAddress))) {
-            while (br.readLine() != null)
+            if (br.readLine() != null)
                 return createCardFromTextFile(br);
         } catch (IOException e) {
-            e.printStackTrace();
+            return createCardFromAPI();
         }
 
         return new MonsterCard();
-    }
-
-    public boolean containsAtLeastOneLine() {
-
-        try (BufferedReader br = new BufferedReader(new FileReader(cardTextFileAddress))) {
-            nextLine = br.readLine();
-
-            if (nextLine == null) {
-                return false;
-            }
-            return true;
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false;
     }
 
     public Card createCardFromTextFile(BufferedReader br) {
@@ -58,18 +39,24 @@ public class CardFileReader {
         return cardCreator.createCardFromBufferedReader();
     }
 
-    public Card createCardFromAPI(String cardName) throws IOException {
+    public Card createCardFromAPI() {
 
         cardName = cardName.replaceAll(" ", "%20"); // fix space character
-        URL url = new URL("https://db.ygoprodeck.com/api/cardinfo.php?name=".concat(cardName));
-        String returnString = getCardStringFromURL(url);
 
-        JSONObject jsonObject = new JSONObject(returnString);
-        CardCreator cardCreator = new CardCreator(jsonObject);
+        try {
+            URL url = new URL("https://db.ygoprodeck.com/api/cardinfo.php?name=".concat(cardName));
+            String returnString = getCardStringFromURL(url);
 
-        writeCardFromAPIToTextFile(cardCreator.createCardFromJSON(), cardName);
+            JSONObject jsonObject = new JSONObject(returnString);
+            cardCreator = new CardCreator(jsonObject);
 
-        return cardCreator.createCardFromJSON();
+            writeCardFromAPIToTextFile(cardCreator.createCardFromJSON());
+
+            return cardCreator.createCardFromJSON();
+        }
+        catch (IOException e) { e.printStackTrace(); }
+
+        return new MonsterCard();
 
     }
 
@@ -96,25 +83,18 @@ public class CardFileReader {
         return response.substring(1, response.length()-1);
     }
 
-    public boolean writeCardFromAPIToTextFile(Card card, String cardName) {
+    public void writeCardFromAPIToTextFile(Card card) throws IOException {
 
         cardName = cardName.replaceAll("%20", " "); // fix space character
 
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
-                    System.getProperty("user.dir") + "/cards/" + cardName + ".txt"));
-            bufferedWriter.append(card.toReadableByDeckFileReaderForm());
-            bufferedWriter.close();
-
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false;
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
+                System.getProperty("user.dir") + "/cards/" + cardName + ".txt"));
+        bufferedWriter.append(card.toReadableByDeckFileReaderForm());
+        bufferedWriter.close();
     }
 
-    public void setCardTextFileAddress(String cardName) {
+    public void setCardNameAndTextFileAddress(String cardName) {
+        this.cardName = cardName;
         this.cardTextFileAddress = System.getProperty("user.dir") + "/cards/" + cardName + ".txt";
     }
 }

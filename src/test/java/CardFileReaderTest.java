@@ -3,8 +3,6 @@ import org.junit.Before;
 import org.junit.Test;
 import berkTheFaith.card.*;
 
-import java.io.IOException;
-
 public class CardFileReaderTest {
 
     Card vorseRaider;
@@ -22,15 +20,7 @@ public class CardFileReaderTest {
     }
 
     @Test
-    public void getVorseRaiderCardFromAPI() throws IOException {
-        CardFileReader cardFileReader = new CardFileReader();
-        assert(vorseRaider.toString().equals(cardFileReader.createCardFromAPI("Vorse Raider").toString()));
-    }
-
-    @Test
-    public void writeVorseRaiderToTxtFile() throws IOException {
-        CardFileReader cardFileReader = new CardFileReader();
-        cardFileReader.createCardFromAPI("Vorse Raider");
+    public void writeVorseRaiderToTxtFile() {
         CardFileReader cardFileReaderToReadFromAPITextFile = new CardFileReader("Vorse Raider");
         assert(vorseRaider.toString().equals(cardFileReaderToReadFromAPITextFile.readSingleCardFromTextFile().toString()));
     }

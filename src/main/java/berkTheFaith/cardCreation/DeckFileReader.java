@@ -31,11 +31,10 @@ public class DeckFileReader {
         }
     }
 
-    // LEFT HERE, READ CARDS ONE BY ONE AND ADD TO DECK
     public ArrayList<Card> readDeckFromTextFile() {
 
         for (String cardName: namesOfCardsInDeck) {
-            cardFileReader.setCardTextFileAddress(cardName);
+            cardFileReader.setCardNameAndTextFileAddress(cardName);
             deck.add(cardFileReader.readSingleCardFromTextFile());
         }
 
