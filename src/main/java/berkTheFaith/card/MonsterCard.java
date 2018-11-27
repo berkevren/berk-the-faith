@@ -5,9 +5,8 @@ public class MonsterCard extends Card {
     protected int attackPoints, defencePoints, level;
     protected String attribute, monsterType;
 
-    public MonsterCard() {
+    public MonsterCard() { }
 
-    }
     public MonsterCard(String cardName, String cardText, CardTypes cardType,
                        String attribute, String monsterType, int attackPoints,
                        int defencePoints, int level) {

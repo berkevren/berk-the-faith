@@ -14,10 +14,10 @@ public class Deck {
         this.deck = new ArrayList<Card>();
     }
 
-    public Deck(String deckTextFileAddress) {
+    public Deck(String deckName) {
 
-        deckFileReader = new DeckFileReader(deckTextFileAddress);
-        deck = deckFileReader.readCardsFromTextFile();
+        deckFileReader = new DeckFileReader(deckName);
+        deck = deckFileReader.readDeckFromTextFile();
 
     }
 

@@ -1,121 +1,48 @@
 package berkTheFaith;
 
 import berkTheFaith.card.Card;
-import berkTheFaith.cardCreation.CardCreator;
-import org.json.JSONObject;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeckFileReader {
 
-    private String deckTextFileAddress, nextLine;
-    private ArrayList<Card> allCardsInFile = new ArrayList<Card>();
-    private CardCreator cardCreator;
+    private String deckTextFileAddress;
+    private ArrayList<String> namesOfCardsInDeck;
+    private ArrayList<Card> deck;
+    CardFileReader cardFileReader;
 
-    public DeckFileReader(String deckTextFileAddress) {
-        this.deckTextFileAddress = System.getProperty("user.dir") + deckTextFileAddress;
+    public DeckFileReader(String deckName) {
+        this.deck = new ArrayList<Card>();
+        this.deckTextFileAddress = System.getProperty("user.dir") + "/decks/" + deckName + ".txt";
+        this.cardFileReader = new CardFileReader();
+        readNamesOfCardsOfDeckFromTxtFile();
     }
 
-    public DeckFileReader() {
-
-    }
-
-    public ArrayList<Card> readCardsFromTextFile() {
-
-        if (!(this.containsAtLeastOneLine()))
-            return new ArrayList<Card>();
-
+    public void readNamesOfCardsOfDeckFromTxtFile() {
+        namesOfCardsInDeck = new ArrayList<String>();
         try (BufferedReader br = new BufferedReader(new FileReader(deckTextFileAddress))) {
             while (br.readLine() != null)
-                allCardsInFile.add(createCardFromTextFile(br));
+                namesOfCardsInDeck.add(br.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return allCardsInFile;
     }
 
-    public boolean containsAtLeastOneLine() {
+    // LEFT HERE, READ CARDS ONE BY ONE AND ADD TO DECK
+    public ArrayList<Card> readDeckFromTextFile() {
 
-        try (BufferedReader br = new BufferedReader(new FileReader(deckTextFileAddress))) {
-            nextLine = br.readLine();
-
-            if (nextLine == null) {
-                return false;
-            }
-            return true;
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (String cardName: namesOfCardsInDeck) {
+            cardFileReader.setCardTextFileAddress(cardName);
+            deck.add(cardFileReader.readSingleCardFromTextFile());
         }
 
-        return false;
+        return deck;
     }
 
-    public Card createCardFromTextFile(BufferedReader br) {
-
-        cardCreator = new CardCreator(br);
-        return cardCreator.createCardFromBufferedReader();
+    public ArrayList<String> getNamesOfCardsInDeck() {
+        return namesOfCardsInDeck;
     }
-
-    public Card createCardFromAPI(String cardName) throws IOException {
-
-        cardName = cardName.replaceAll(" ", "%20"); // fix space character
-        URL url = new URL("https://db.ygoprodeck.com/api/cardinfo.php?name=".concat(cardName));
-        String returnString = getCardStringFromURL(url);
-
-        JSONObject jsonObject = new JSONObject(returnString);
-        CardCreator cardCreator = new CardCreator(jsonObject);
-
-        writeCardFromAPIToTextFile(cardCreator.createCardFromJSON(), cardName);
-
-        return cardCreator.createCardFromJSON();
-
-    }
-
-    public String getCardStringFromURL(URL url) {
-
-        String response = "";
-
-        try {
-
-            HttpURLConnection connection = ((HttpURLConnection)url.openConnection());
-            connection.addRequestProperty("User-Agent", "Mozilla/4.0");
-            InputStream input = connection.getInputStream();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-            String theEntireMessage;
-
-            while ((theEntireMessage =reader.readLine()) != null)
-                response = theEntireMessage.concat(theEntireMessage);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // delete [ at the start and ] at the end
-        return response.substring(1, response.length()-1);
-    }
-
-    public boolean writeCardFromAPIToTextFile(Card card, String cardName) {
-
-        cardName = cardName.replaceAll("%20", " "); // fix space character
-
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(
-                    System.getProperty("user.dir") + "/cards/" + cardName + ".txt"));
-            bufferedWriter.append(card.toReadableByDeckFileReaderForm());
-            bufferedWriter.close();
-
-            return true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return false;
-
-    }
-
 }
