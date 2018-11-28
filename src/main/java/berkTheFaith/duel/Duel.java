@@ -1,4 +1,4 @@
-package berkTheFaith;
+package berkTheFaith.duel;
 
 public class Duel {
 

@@ -1,0 +1,7 @@
+package berkTheFaith.cardZone;
+
+public enum CardPosition {
+
+    FACE_UP_ATTACK, FACE_UP_DEFENCE, FACE_DOWN_DEFENCE, FACE_UP_SPELL_TRAP,
+    FACE_DOWN_SPELL_TRAP, FACE_DOWN_FUSION, FACE_UP_GRAVEYARD;
+}

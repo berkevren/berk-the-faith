@@ -5,6 +5,8 @@ public class MonsterCard extends Card {
     protected int attackPoints, defencePoints, level;
     protected String attribute, monsterType;
 
+    protected int numberOfRequiredTributes;
+
     public MonsterCard() { }
 
     public MonsterCard(String cardName, String cardText, CardTypes cardType,
@@ -18,14 +20,16 @@ public class MonsterCard extends Card {
         this.level = level;
         this.attribute = attribute;
         this.monsterType = monsterType;
+
+        setNumberOfRequiredTributes();
     }
 
-    public int getNumberOfRequiredTributes() {
+    public void setNumberOfRequiredTributes() {
         if (level <= 4)
-            return 0;
+            numberOfRequiredTributes = 0;
         if (level <= 6)
-            return 1;
-        return 2;
+            numberOfRequiredTributes = 1;
+        numberOfRequiredTributes = 2;
     }
 
     @Override
@@ -43,23 +47,11 @@ public class MonsterCard extends Card {
         return super.toReadableByDeckFileReaderForm() + readableByDeckFileReaderForm;
     }
 
-    public void setAttackPoints(int attackPoints) {
-        this.attackPoints = attackPoints;
+    public int getAttackPoints() {
+        return attackPoints;
     }
 
-    public void setDefencePoints(int defencePoints) {
-        this.defencePoints = defencePoints;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    public void setAttribute(String attribute) {
-        this.attribute = attribute;
-    }
-
-    public void setMonsterType(String monsterType) {
-        this.monsterType = monsterType;
+    public int getDefencePoints() {
+        return defencePoints;
     }
 }

@@ -1,4 +1,4 @@
-package berkTheFaith;
+package berkTheFaith.card;
 
 public class CardEffect {
 }

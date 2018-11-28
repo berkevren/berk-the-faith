@@ -1,8 +1,7 @@
-import berkTheFaith.Deck;
-import berkTheFaith.Player;
+import berkTheFaith.duel.Deck;
+import berkTheFaith.duel.Player;
 import berkTheFaith.card.NormalMonsterCard;
 import org.junit.Before;
-import org.junit.Test;
 
 import berkTheFaith.card.*;
 

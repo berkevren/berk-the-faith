@@ -1,4 +1,4 @@
-package berkTheFaith;
+package berkTheFaith.duel;
 
 import berkTheFaith.card.*;
 
@@ -7,12 +7,14 @@ public class Player {
     private String playerName;
     private Deck playerDeck;
     private Deck playerHand;
+    private int lifePoint;
 
     public Player(String playerName, String deckTextFileAddress) {
 
         this.playerName = playerName;
         this.playerDeck = new Deck(deckTextFileAddress);
         this.playerHand = new Deck();
+        this.lifePoint = 8000;
 
     }
 

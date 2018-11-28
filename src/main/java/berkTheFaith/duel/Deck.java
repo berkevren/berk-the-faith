@@ -1,4 +1,4 @@
-package berkTheFaith;
+package berkTheFaith.duel;
 
 import java.util.ArrayList;
 import java.util.Collections;

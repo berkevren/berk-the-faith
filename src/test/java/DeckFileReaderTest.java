@@ -1,4 +1,4 @@
-import berkTheFaith.Deck;
+import berkTheFaith.duel.Deck;
 import berkTheFaith.cardCreation.DeckFileReader;
 import berkTheFaith.card.Card;
 import berkTheFaith.card.CardTypes;
@@ -71,7 +71,7 @@ public class DeckFileReaderTest {
 
         Deck actualDeck = new Deck("DarkMagician");
         Card actualCard = actualDeck.getTopCardAndRemoveFromDeck();
-        
+
         assert(darkMagician.toString().equals(actualCard.toString()));
     }
 
