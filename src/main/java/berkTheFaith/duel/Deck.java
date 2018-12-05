@@ -40,4 +40,12 @@ public class Deck {
         int firstCard = 0;
         return this.deck.get(firstCard);
     }
+
+    public ArrayList<Card> getDeck() {
+        return deck;
+    }
+
+    public DeckFileReader getDeckFileReader() {
+        return deckFileReader;
+    }
 }

@@ -2,18 +2,21 @@ package berkTheFaith.duel;
 
 import berkTheFaith.card.MonsterCard;
 import berkTheFaith.cardZone.CardPosition;
+import berkTheFaith.cardZone.Graveyard;
 import berkTheFaith.cardZone.MonsterCardZone;
 
 public class MonsterBattler {
 
+    private MonsterCardZone attackingMonsterZone, defendingMonsterZone;
     private MonsterCard attackingMonster, defendingMonster;
-    private CardPosition attackingMonsterPosition, defendingMonsterPosition;
+    private CardPosition defendingMonsterPosition;
     public boolean attackingPonsterIsDestroyed, defendingMonsterIsDestroyed;
 
     public MonsterBattler(MonsterCardZone attackingMonsterZone, MonsterCardZone defendingMonsterZone) {
+        this.attackingMonsterZone = attackingMonsterZone;
+        this.defendingMonsterZone = defendingMonsterZone;
         attackingMonster = (MonsterCard)attackingMonsterZone.getCardOnTheZone();
         defendingMonster = (MonsterCard)defendingMonsterZone.getCardOnTheZone();
-        attackingMonsterPosition = attackingMonsterZone.getCardPosition();
         defendingMonsterPosition = defendingMonsterZone.getCardPosition();
         attackingPonsterIsDestroyed = false;
         defendingMonsterIsDestroyed = false;
@@ -37,5 +40,12 @@ public class MonsterBattler {
             attackingPonsterIsDestroyed = false;
             defendingMonsterIsDestroyed = attackingMonster.getAttackPoints() > defendingMonster.getDefencePoints();
         }
+    }
+
+    public void sendMonstersToGraveyard(Graveyard graveyard) {
+        if (attackingPonsterIsDestroyed)
+            attackingMonsterZone.sendCardFromZoneToGraveyard(graveyard);
+        if (defendingMonsterIsDestroyed)
+            defendingMonsterZone.sendCardFromZoneToGraveyard(graveyard);
     }
 }

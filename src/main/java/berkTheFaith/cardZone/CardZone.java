@@ -25,7 +25,9 @@ public class CardZone {
         return cardOnTheZone;
     }
 
-    public void sendCardFromZoneToGraveyard() {
+    public void sendCardFromZoneToGraveyard(Graveyard graveyard) {
+
+        graveyard.getGraveyardPile().addCardToBottomOfDeck(cardOnTheZone);
         this.occupied = false;
         cardOnTheZone = null;
     }

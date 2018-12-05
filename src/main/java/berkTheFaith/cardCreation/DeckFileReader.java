@@ -2,9 +2,7 @@ package berkTheFaith.cardCreation;
 
 import berkTheFaith.card.Card;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class DeckFileReader {
@@ -35,7 +33,7 @@ public class DeckFileReader {
 
         for (String cardName: namesOfCardsInDeck) {
             cardFileReader.setCardNameAndTextFileAddress(cardName);
-            deck.add(cardFileReader.readSingleCardFromTextFile());
+            deck.add(cardFileReader.readSingleCard());
         }
 
         return deck;
@@ -43,5 +41,15 @@ public class DeckFileReader {
 
     public ArrayList<String> getNamesOfCardsInDeck() {
         return namesOfCardsInDeck;
+    }
+
+    public void writeCardToDeckFile(String cardName) {
+        try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(deckTextFileAddress, true))) {
+            bufferedWriter.write("\n\n");
+            bufferedWriter.write(cardName);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

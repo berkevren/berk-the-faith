@@ -3,6 +3,7 @@ package berkTheFaith.cardCreation;
 import berkTheFaith.card.Card;
 import berkTheFaith.card.CardTypes;
 import berkTheFaith.card.MonsterCard;
+import berkTheFaith.card.SpellCard;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -23,8 +24,11 @@ public class CardCreator {
 
     public Card createCardFromJSON() {
 
-        if (jsonObjectWithCardInfo.getString("type").equals("Normal Monster")) {
+        if (jsonObjectWithCardInfo.getString("type").equals("Normal Monster"))
             return createNormalMonsterCardFromJSON();
+        if (jsonObjectWithCardInfo.getString("type").equals("Spell Card")) {
+            if (jsonObjectWithCardInfo.getString("race").equals("Normal"))
+                return  createNormalSpellCardFromJSON();
         }
 
 
@@ -48,21 +52,42 @@ public class CardCreator {
         return card;
     }
 
+    private Card createNormalSpellCardFromJSON() {
+
+        String cardName = jsonObjectWithCardInfo.getString("name");
+        String cardText = jsonObjectWithCardInfo.getString("desc");
+        CardTypes cardType = CardTypes.NORMALSPELL;
+
+        SpellCard card = new SpellCard(cardName, cardText, cardType);
+
+        return card;
+
+    }
+
     public Card createCardFromBufferedReader() {
 
+        String cardTypeString;
+
         try {
-            if (br.readLine().equals("Normal Monster")) {
+            cardTypeString = br.readLine();
+
+            if (cardTypeString.equals(""))
+                return null;
+            if (cardTypeString.equals("Normal Monster"))
                 return createNormalMonsterCardFromBufferedReader();
-            }
+            if (cardTypeString.equals("Normal Spell"))
+                return createNormalSpellCardFromBufferedReader();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
+
         return null;
     }
 
-    public Card createNormalMonsterCardFromBufferedReader() throws IOException{
+    public Card createNormalMonsterCardFromBufferedReader() throws IOException {
 
         String cardName = br.readLine();
         String cardText = br.readLine();
@@ -75,6 +100,16 @@ public class CardCreator {
 
         MonsterCard card = new MonsterCard(cardName, cardText, cardType, attribute,
                 monsterType, attackPoints, defencePoints, level);
+
+        return card;
+    }
+
+    public Card createNormalSpellCardFromBufferedReader() throws IOException {
+        String cardName = br.readLine();
+        String cardText = br.readLine();
+        CardTypes cardType = CardTypes.NORMALSPELL;
+
+        SpellCard card = new SpellCard(cardName, cardText, cardType);
 
         return card;
     }

@@ -20,7 +20,7 @@ public class CardFileReader {
 
     public CardFileReader() { }
 
-    public Card readSingleCardFromTextFile() {
+    public Card readSingleCard() {
 
         try (BufferedReader br = new BufferedReader(new FileReader(cardTextFileAddress))) {
             if (br.readLine() != null)

@@ -16,13 +16,13 @@ public class CardFileReaderTest {
     @Test
     public void deckFromVorseRaiderOnlyTest() {
         CardFileReader cardFileReader = new CardFileReader("Vorse Raider");
-        assert(vorseRaider.toString().equals(cardFileReader.readSingleCardFromTextFile().toString()));
+        assert(vorseRaider.toString().equals(cardFileReader.readSingleCard().toString()));
     }
 
     @Test
     public void writeVorseRaiderToTxtFile() {
         CardFileReader cardFileReader = new CardFileReader("Vorse Raider");
-        assert(vorseRaider.toString().equals(cardFileReader.readSingleCardFromTextFile().toString()));
+        assert(vorseRaider.toString().equals(cardFileReader.readSingleCard().toString()));
     }
 
 }

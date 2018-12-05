@@ -1,6 +1,6 @@
-import berkTheFaith.card.Card;
 import berkTheFaith.card.MonsterCard;
 import berkTheFaith.cardCreation.CardFileReader;
+import berkTheFaith.cardZone.Graveyard;
 import berkTheFaith.cardZone.MonsterCardZone;
 import berkTheFaith.duel.MonsterBattler;
 import org.junit.Before;
@@ -16,9 +16,9 @@ public class MonsterBattlerTest {
     @Before
     public void init() {
         cardFileReader = new CardFileReader("Blue-Eyes White Dragon");
-        blueEyesWhiteDragon = (MonsterCard)cardFileReader.readSingleCardFromTextFile();
+        blueEyesWhiteDragon = (MonsterCard)cardFileReader.readSingleCard();
         cardFileReader.setCardNameAndTextFileAddress("Dark Magician");
-        darkMagician = (MonsterCard)cardFileReader.readSingleCardFromTextFile();
+        darkMagician = (MonsterCard)cardFileReader.readSingleCard();
 
         blueEyesZone = new MonsterCardZone(1);
         blueEyesZone.summonMonsterInAttackPosition((MonsterCard)blueEyesWhiteDragon);
@@ -63,5 +63,16 @@ public class MonsterBattlerTest {
         monsterBattler.battleMonsters();
         assert(!monsterBattler.attackingPonsterIsDestroyed);
         assert(!monsterBattler.defendingMonsterIsDestroyed);
+    }
+
+    @Test
+    public void sendMonstersToGraveyardTest() {
+        monsterBattler = new MonsterBattler(blueEyesZone, darkMagicianZone);
+        Graveyard graveyard = new Graveyard();
+        monsterBattler.battleMonsters();
+        monsterBattler.sendMonstersToGraveyard(graveyard);
+
+        assert(darkMagician.toString().equals
+                (graveyard.getGraveyardPile().revealTopCard().toString()));
     }
 }
