@@ -1,5 +1,7 @@
 package berkTheFaith.cardZone;
 
+import berkTheFaith.card.MonsterCard;
+
 public class MonsterCardZone extends CardZone {
 
     private CardPosition cardPosition;
@@ -8,13 +10,13 @@ public class MonsterCardZone extends CardZone {
         super(zoneNumber);
     }
 
-    public void summonMonsterInAttackPosition() {
-        super.putCardOnCardZone(cardOnTheZone);
+    public void summonMonsterInAttackPosition(MonsterCard monsterCard) {
+        super.putCardOnCardZone(monsterCard);
         cardPosition = CardPosition.FACE_UP_ATTACK;
     }
 
-    public void setMonsterInDefensePosition() {
-        super.putCardOnCardZone(cardOnTheZone);
+    public void setMonsterInDefensePosition(MonsterCard monsterCard) {
+        super.putCardOnCardZone(monsterCard);
         cardPosition = CardPosition.FACE_DOWN_DEFENCE;
     }
 

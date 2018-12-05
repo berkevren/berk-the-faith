@@ -5,7 +5,6 @@ import berkTheFaith.card.CardTypes;
 import berkTheFaith.card.NormalMonsterCard;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 
 public class DeckFileReaderTest {

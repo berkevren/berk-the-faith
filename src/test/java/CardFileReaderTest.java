@@ -21,8 +21,8 @@ public class CardFileReaderTest {
 
     @Test
     public void writeVorseRaiderToTxtFile() {
-        CardFileReader cardFileReaderToReadFromAPITextFile = new CardFileReader("Vorse Raider");
-        assert(vorseRaider.toString().equals(cardFileReaderToReadFromAPITextFile.readSingleCardFromTextFile().toString()));
+        CardFileReader cardFileReader = new CardFileReader("Vorse Raider");
+        assert(vorseRaider.toString().equals(cardFileReader.readSingleCardFromTextFile().toString()));
     }
 
 }

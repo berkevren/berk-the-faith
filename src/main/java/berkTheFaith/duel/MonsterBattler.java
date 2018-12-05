@@ -13,23 +13,29 @@ public class MonsterBattler {
     public MonsterBattler(MonsterCardZone attackingMonsterZone, MonsterCardZone defendingMonsterZone) {
         attackingMonster = (MonsterCard)attackingMonsterZone.getCardOnTheZone();
         defendingMonster = (MonsterCard)defendingMonsterZone.getCardOnTheZone();
-        attackingMonsterPosition = CardPosition.FACE_UP_ATTACK;
+        attackingMonsterPosition = attackingMonsterZone.getCardPosition();
         defendingMonsterPosition = defendingMonsterZone.getCardPosition();
         attackingPonsterIsDestroyed = false;
         defendingMonsterIsDestroyed = false;
     }
 
+    // if the result is negative, then the attacking monster's player loses life points
     public int calculateLifePointDamage() {
+
+        if (defendingMonsterPosition == CardPosition.FACE_UP_ATTACK) {
+            return (attackingMonster.getAttackPoints() - defendingMonster.getAttackPoints());
+        }
+        return (attackingMonster.getAttackPoints() - defendingMonster.getDefencePoints());
+    }
+
+    public void battleMonsters() {
 
         if (defendingMonsterPosition == CardPosition.FACE_UP_ATTACK) {
             defendingMonsterIsDestroyed = attackingMonster.getAttackPoints() >= defendingMonster.getAttackPoints();
             attackingPonsterIsDestroyed = attackingMonster.getAttackPoints() <= defendingMonster.getAttackPoints();
-            return Math.abs(attackingMonster.getAttackPoints() - defendingMonster.getAttackPoints());
-        }
-        else {
+        } else {
             attackingPonsterIsDestroyed = false;
             defendingMonsterIsDestroyed = attackingMonster.getAttackPoints() > defendingMonster.getDefencePoints();
-            return Math.abs(attackingMonster.getAttackPoints() - defendingMonster.getDefencePoints());
         }
     }
 }

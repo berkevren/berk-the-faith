@@ -47,6 +47,14 @@ public class MonsterCard extends Card {
         return super.toReadableByDeckFileReaderForm() + readableByDeckFileReaderForm;
     }
 
+    public void changeAttackPoints(int change) {
+        this.attackPoints += change;
+    }
+
+    public void changeDefencePoints(int change) {
+        this.defencePoints += change;
+    }
+
     public int getAttackPoints() {
         return attackPoints;
     }
