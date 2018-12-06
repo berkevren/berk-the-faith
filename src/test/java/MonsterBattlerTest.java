@@ -21,10 +21,10 @@ public class MonsterBattlerTest {
         darkMagician = (MonsterCard)cardFileReader.readSingleCard();
 
         blueEyesZone = new MonsterCardZone(1);
-        blueEyesZone.summonMonsterInAttackPosition((MonsterCard)blueEyesWhiteDragon);
+        blueEyesZone.summonMonsterInAttackPosition(blueEyesWhiteDragon);
 
         darkMagicianZone = new MonsterCardZone(1);
-        darkMagicianZone.summonMonsterInAttackPosition((MonsterCard)darkMagician);
+        darkMagicianZone.summonMonsterInAttackPosition(darkMagician);
     }
 
     @Test

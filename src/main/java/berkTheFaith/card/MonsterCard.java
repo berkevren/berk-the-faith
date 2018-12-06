@@ -9,10 +9,10 @@ public class MonsterCard extends Card {
 
     public MonsterCard() { }
 
-    public MonsterCard(String cardName, String cardText, CardTypes cardType,
+    public MonsterCard(int id, String cardName, String cardText, CardTypes cardType,
                        String attribute, String monsterType, int attackPoints,
                        int defencePoints, int level) {
-        super(cardName, cardText, cardType);
+        super(id, cardName, cardText, cardType);
         this.cardName = cardName;
         this.cardText = cardText;
         this.attackPoints = attackPoints;
@@ -35,7 +35,7 @@ public class MonsterCard extends Card {
     @Override
     public String toString() {
 
-        String result = "Name: " + cardName + "\nCard Type: " + cardType + "\nAttribute: " + attribute +
+        String result = "Id: " + id + "\nName: " + cardName + "\nCard Type: " + cardType + "\nAttribute: " + attribute +
                 "\nMonster Type: " + monsterType + "\nText: " + cardText + "\nAttack Points: " + attackPoints +
                 "\nDefence Points: " + defencePoints + "\nLevel: " + level;
         return result;

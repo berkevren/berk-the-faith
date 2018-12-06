@@ -13,6 +13,7 @@ public class CardCreator {
 
     private JSONObject jsonObjectWithCardInfo;
     private BufferedReader br;
+    private int id;
 
     public CardCreator(JSONObject jsonObjectWithCardInfo) {
         this.jsonObjectWithCardInfo = jsonObjectWithCardInfo;
@@ -37,6 +38,7 @@ public class CardCreator {
 
     public Card createNormalMonsterCardFromJSON() {
 
+        int id = Integer.valueOf(jsonObjectWithCardInfo.getString("id"));
         String cardName = jsonObjectWithCardInfo.getString("name");
         String cardText = jsonObjectWithCardInfo.getString("desc");
         CardTypes cardType = CardTypes.NORMALMONSTER;
@@ -46,19 +48,20 @@ public class CardCreator {
         int defencePoints = Integer.valueOf(jsonObjectWithCardInfo.getString("def"));
         int level = Integer.valueOf(jsonObjectWithCardInfo.getString("level"));
 
-        MonsterCard card = new MonsterCard(cardName, cardText, cardType, attribute,
-                monsterType, attackPoints, defencePoints, level);
+        MonsterCard card = new MonsterCard(id, cardName, cardText, cardType,
+                attribute, monsterType, attackPoints, defencePoints, level);
 
         return card;
     }
 
     private Card createNormalSpellCardFromJSON() {
 
+        int id = Integer.valueOf(jsonObjectWithCardInfo.getString("id"));
         String cardName = jsonObjectWithCardInfo.getString("name");
         String cardText = jsonObjectWithCardInfo.getString("desc");
         CardTypes cardType = CardTypes.NORMALSPELL;
 
-        SpellCard card = new SpellCard(cardName, cardText, cardType);
+        SpellCard card = new SpellCard(id, cardName, cardText, cardType);
 
         return card;
 
@@ -69,6 +72,7 @@ public class CardCreator {
         String cardTypeString;
 
         try {
+            id = Integer.valueOf(br.readLine());
             cardTypeString = br.readLine();
 
             if (cardTypeString.equals(""))
@@ -98,18 +102,19 @@ public class CardCreator {
         int defencePoints = Integer.valueOf(br.readLine());
         int level = Integer.valueOf(br.readLine());
 
-        MonsterCard card = new MonsterCard(cardName, cardText, cardType, attribute,
-                monsterType, attackPoints, defencePoints, level);
+        MonsterCard card = new MonsterCard(id, cardName, cardText, cardType,
+                attribute, monsterType, attackPoints, defencePoints, level);
 
         return card;
     }
 
     public Card createNormalSpellCardFromBufferedReader() throws IOException {
+
         String cardName = br.readLine();
         String cardText = br.readLine();
         CardTypes cardType = CardTypes.NORMALSPELL;
 
-        SpellCard card = new SpellCard(cardName, cardText, cardType);
+        SpellCard card = new SpellCard(id, cardName, cardText, cardType);
 
         return card;
     }

@@ -8,9 +8,10 @@ public class CardFileReaderTest {
     Card vorseRaider;
     @Before
     public void init() {
-        vorseRaider = new NormalMonsterCard("Vorse Raider", "This wicked Beast-Warrior does every horrid " +
-                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
-                "DARK", "Beast-Warrior", 1900,1200, 4);
+        vorseRaider = new NormalMonsterCard(14898066, "Vorse Raider",
+                "This wicked Beast-Warrior does every horrid thing imaginable, and loves it! " +
+                        "His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
+                "DARK", "Beast-Warrior", 1900, 1200, 4);
     }
 
     @Test

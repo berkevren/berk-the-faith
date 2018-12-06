@@ -21,14 +21,16 @@ public class PlayerTest {
 
     public void initCards() {
 
-        vorseRaider = new NormalMonsterCard("Vorse Raider", "This wicked Beast-Warrior does every horrid " +
-                "thing imaginable, and loves it! His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
-                "Dark", "Beast-Warrior", 1900,1200, 4);
+        vorseRaider = new NormalMonsterCard(14898066, "Vorse Raider",
+                "This wicked Beast-Warrior does every horrid thing imaginable, and loves it! " +
+                        "His axe bears the marks of his countless victims.", CardTypes.NORMALMONSTER,
+                "DARK", "Beast-Warrior", 1900, 1200, 4);
 
-        blueEyesWhiteDragon = new NormalMonsterCard("Blue-Eyes White Dragon", "This legendary dragon " +
-                "is a powerful engine of destruction. Virtually invincible, very few have faced this awesome creature " +
-                "and lived to tell the tale.", CardTypes.NORMALMONSTER,
-                "Light", "Dragon", 3000,2500, 8);
+        blueEyesWhiteDragon = new NormalMonsterCard(89631139, "Blue-Eyes White Dragon",
+                "This legendary dragon is a powerful engine of destruction. Virtually invincible, " +
+                        "very few have faced this awesome creature and lived to tell the tale.",
+                CardTypes.NORMALMONSTER, "LIGHT", "Dragon", 3000,
+                2500, 8);
     }
 
     public void initDeckAddress() {

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class Card {
 
+    protected int id;
     protected String cardName, cardText;
     protected CardTypes cardType;
 
@@ -12,7 +13,8 @@ public abstract class Card {
 
     }
 
-    public Card(String cardName, String cardText, CardTypes cardType) {
+    public Card(int id, String cardName, String cardText, CardTypes cardType) {
+        this.id = id;
         this.cardName = cardName;
         this.cardText = cardText;
         this.cardType = cardType;
@@ -26,12 +28,13 @@ public abstract class Card {
 
     public String toString() {
 
-        String result = "Name: " + cardName + "\nCard Type: " + cardType + "\nText: " + cardText;
+        String result = "Id: " + id + "\nName: " + cardName + "\nCard Type: " + cardType + "\nText: " + cardText;
         return result;
     }
 
     public String toReadableByDeckFileReaderForm() {
-        String readableByDeckFileReaderForm = "\n" + cardType.toString(cardType) + "\n" + cardName + "\n" + cardText;
+        String readableByDeckFileReaderForm = "\n" + id + "\n" + cardType.toString(cardType) + "\n" + cardName +
+                "\n" + cardText;
         return readableByDeckFileReaderForm;
     }
 
