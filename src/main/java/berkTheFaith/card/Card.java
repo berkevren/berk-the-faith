@@ -38,6 +38,10 @@ public abstract class Card {
         return readableByDeckFileReaderForm;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setCardType(CardTypes cardType) {
         this.cardType = cardType;
     }

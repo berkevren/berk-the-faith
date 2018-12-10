@@ -4,6 +4,9 @@ import berkTheFaith.card.Card;
 import berkTheFaith.card.MonsterCard;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -40,18 +43,18 @@ public class CardFileReader {
 
     public Card createCardFromAPI() {
 
-        cardName = cardName.replaceAll(" ", "%20"); // fix space character
-
         try {
-            URL url = new URL("https://db.ygoprodeck.com/api/cardinfo.php?name=".concat(cardName));
-            String returnString = getCardStringFromURL(url);
+
+            String returnString = getCardStringFromURL();
 
             JSONObject jsonObject = new JSONObject(returnString);
             cardCreator = new CardCreator(jsonObject);
 
-            writeCardFromAPIToTextFile(cardCreator.createCardFromJSON());
+            Card card = cardCreator.createCardFromJSON();
+            writeCardFromAPIToTextFile(card);
+            writeCardPictureFromAPItoImageFile(card.getId());
 
-            return cardCreator.createCardFromJSON();
+            return card;
         }
         catch (IOException e) { e.printStackTrace(); }
 
@@ -59,15 +62,15 @@ public class CardFileReader {
 
     }
 
-    public String getCardStringFromURL(URL url) {
+    public String getCardStringFromURL() {
 
         String response = "";
+        cardName = cardName.replaceAll(" ", "%20"); // fix space character
 
         try {
 
-            HttpURLConnection connection = ((HttpURLConnection)url.openConnection());
-            connection.addRequestProperty("User-Agent", "Mozilla/4.0");
-            InputStream input = connection.getInputStream();
+            URL url = new URL("https://db.ygoprodeck.com/api/cardinfo.php?name=".concat(cardName));
+            InputStream input = addHeadersToConnection(url);
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
             String theEntireMessage;
 
@@ -82,6 +85,13 @@ public class CardFileReader {
         return response.substring(1, response.length()-1);
     }
 
+    // so the API behaves like a browser
+    public InputStream addHeadersToConnection(URL url) throws IOException {
+        HttpURLConnection connection = ((HttpURLConnection)url.openConnection());
+        connection.addRequestProperty("User-Agent", "Mozilla/4.0");
+        return connection.getInputStream();
+    }
+
     public void writeCardFromAPIToTextFile(Card card) throws IOException {
 
         cardName = cardName.replaceAll("%20", " "); // fix space character
@@ -90,6 +100,15 @@ public class CardFileReader {
                 System.getProperty("user.dir") + "/cards/" + cardName + ".txt"));
         bufferedWriter.append(card.toReadableByDeckFileReaderForm());
         bufferedWriter.close();
+    }
+
+    public void writeCardPictureFromAPItoImageFile(int cardId) throws IOException {
+        URL url = new URL("https://ygoprodeck.com/pics/" + cardId + ".jpg");
+        InputStream input = addHeadersToConnection(url);
+
+        BufferedImage cardImage = ImageIO.read(input);
+        File outputFile = new File("cardPictures/".concat(cardName).concat(".jpg"));
+        ImageIO.write(cardImage, "jpeg", outputFile);
     }
 
     public void setCardNameAndTextFileAddress(String cardName) {
