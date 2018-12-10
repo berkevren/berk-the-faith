@@ -3,6 +3,9 @@ import org.junit.Before;
 import org.junit.Test;
 import berkTheFaith.card.*;
 
+import java.io.File;
+import java.io.IOException;
+
 public class CardFileReaderTest {
 
     Card vorseRaider;
@@ -24,6 +27,14 @@ public class CardFileReaderTest {
     public void writeVorseRaiderToTxtFile() {
         CardFileReader cardFileReader = new CardFileReader("Vorse Raider");
         assert(vorseRaider.toString().equals(cardFileReader.readSingleCard().toString()));
+    }
+
+    @Test
+    public void writeCardPictureFromAPItoImageFile() throws IOException {
+        CardFileReader cardFileReader = new CardFileReader("Vorse Raider");
+        cardFileReader.writeCardPictureFromAPItoImageFile(14898066);
+        File file = new File("cardPictures/Vorse Raider.jpg");
+        assert(file.isFile());
     }
 
 }

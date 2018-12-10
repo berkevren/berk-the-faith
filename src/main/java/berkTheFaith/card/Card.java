@@ -42,6 +42,10 @@ public abstract class Card {
         return id;
     }
 
+    public String getCardName() {
+        return cardName;
+    }
+
     public void setCardType(CardTypes cardType) {
         this.cardType = cardType;
     }
